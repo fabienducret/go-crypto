@@ -7,13 +7,11 @@ import (
 
 type decryption struct {
 	keyRepository KeyRepository
-	keyBuilder    KeyBuilder
 }
 
-func New(keyRepository KeyRepository, keyBuilder KeyBuilder) *decryption {
+func New(keyRepository KeyRepository) *decryption {
 	return &decryption{
 		keyRepository: keyRepository,
-		keyBuilder:    keyBuilder,
 	}
 }
 
@@ -23,7 +21,7 @@ func (d *decryption) From(ciphertext []byte) ([]byte, error) {
 		return nil, err
 	}
 
-	key, err := d.keyBuilder.From(bytes)
+	key, err := privateKeyFrom(bytes)
 	if err != nil {
 		return nil, err
 	}

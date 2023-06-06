@@ -8,13 +8,11 @@ import (
 
 type encryption struct {
 	keyRepository KeyRepository
-	keyBuilder    KeyBuilder
 }
 
-func New(keyRepository KeyRepository, keyBuilder KeyBuilder) *encryption {
+func New(keyRepository KeyRepository) *encryption {
 	return &encryption{
 		keyRepository: keyRepository,
-		keyBuilder:    keyBuilder,
 	}
 }
 
@@ -24,7 +22,7 @@ func (e *encryption) From(plaintext []byte) ([]byte, error) {
 		return nil, err
 	}
 
-	key, err := e.keyBuilder.From(bytes)
+	key, err := publicKeyFrom(bytes)
 	if err != nil {
 		return nil, err
 	}

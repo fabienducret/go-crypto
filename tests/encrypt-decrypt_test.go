@@ -1,7 +1,6 @@
 package tests
 
 import (
-	"cryptography/builders"
 	"cryptography/decryption"
 	"cryptography/encryption"
 	"cryptography/tests/stubs"
@@ -11,11 +10,9 @@ import (
 func TestEncryptDecrypt(t *testing.T) {
 	encrypt := encryption.New(
 		stubs.NewPublicKeyRepository(),
-		builders.NewPublicKeyBuilder(),
 	)
 	decrypt := decryption.New(
 		stubs.NewPrivateKeyRepository(),
-		builders.NewPrivateKeyBuilder(),
 	)
 
 	t.Run("encrypt and decrypt a message", func(t *testing.T) {
@@ -34,7 +31,6 @@ func TestEncryptDecrypt(t *testing.T) {
 		//Given
 		encrypt := encryption.New(
 			stubs.NewInvalidPublicKeyRepository(),
-			builders.NewPublicKeyBuilder(),
 		)
 		toEncrypt := []byte("message to encypt")
 

@@ -1,4 +1,4 @@
-package builders
+package decryption
 
 import (
 	"crypto/rsa"
@@ -7,13 +7,7 @@ import (
 	"errors"
 )
 
-type privateKeyBuilder struct{}
-
-func NewPrivateKeyBuilder() *privateKeyBuilder {
-	return &privateKeyBuilder{}
-}
-
-func (p *privateKeyBuilder) From(bytes []byte) (*rsa.PrivateKey, error) {
+func privateKeyFrom(bytes []byte) (*rsa.PrivateKey, error) {
 	block, rest := pem.Decode(bytes)
 	if block == nil {
 		return nil, errors.New("invalid public key")

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"cryptography/builders"
 	"cryptography/decryption"
 	"cryptography/encryption"
 	"cryptography/repositories"
@@ -12,11 +11,9 @@ import (
 func main() {
 	encrypt := encryption.New(
 		repositories.NewPublicKeyRepository(),
-		builders.NewPublicKeyBuilder(),
 	)
 	decrypt := decryption.New(
 		repositories.NewPrivateKeyRepository(),
-		builders.NewPrivateKeyBuilder(),
 	)
 
 	toEncrypt := []byte("Hello, world !")
