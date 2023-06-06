@@ -10,7 +10,7 @@ import (
 func privateKeyFrom(bytes []byte) (*rsa.PrivateKey, error) {
 	block, rest := pem.Decode(bytes)
 	if block == nil {
-		return nil, errors.New("invalid public key")
+		return nil, errors.New("invalid private key")
 	}
 
 	if len(rest) > 0 {

@@ -30,7 +30,7 @@ func TestEncryptDecrypt(t *testing.T) {
 	t.Run("get error on invalid public key", func(t *testing.T) {
 		//Given
 		encrypt := encryption.New(
-			stubs.NewInvalidPublicKeyRepository(),
+			stubs.NewInvalidKeyRepository(),
 		)
 		toEncrypt := []byte("message to encypt")
 
@@ -39,6 +39,21 @@ func TestEncryptDecrypt(t *testing.T) {
 
 		// Then
 		assertEqual(t, err.Error(), "invalid public key")
+	})
+
+	t.Run("get error on invalid private key", func(t *testing.T) {
+		//Given
+		decrypt := decryption.New(
+			stubs.NewInvalidKeyRepository(),
+		)
+		toEncrypt := []byte("message to encypt")
+
+		// When
+		toDecrypt, _ := encrypt.From(toEncrypt)
+		_, err := decrypt.From(toDecrypt)
+
+		// Then
+		assertEqual(t, err.Error(), "invalid private key")
 	})
 }
 
