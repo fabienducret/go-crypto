@@ -5,7 +5,6 @@ import (
 	"cryptography/encryption"
 	"cryptography/repositories"
 	"fmt"
-	"log"
 )
 
 func main() {
@@ -19,12 +18,12 @@ func main() {
 	toEncrypt := []byte("Hello, world !")
 	toDecrypt, err := encrypt.From(toEncrypt)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
 	}
 
 	decrypted, err := decrypt.From(toDecrypt)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
 	}
 
 	fmt.Println(string(decrypted))
